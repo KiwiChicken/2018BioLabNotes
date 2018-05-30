@@ -7,3 +7,6 @@
 -'git status': tells you what is going on
 
 *this is a line for testing*
+*Italic* **this is bold**
+
+
