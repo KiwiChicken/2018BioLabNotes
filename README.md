@@ -10,3 +10,5 @@
 *Italic* **this is bold**
 
 "testing 6/1/18"
+
+always a good habit to have branches to store different things
