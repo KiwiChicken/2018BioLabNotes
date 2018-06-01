@@ -1,6 +1,6 @@
 #comment
 
--/* bullet pt
+-lol
 
 -'git init': initalize a respostory
     -no nesting/creating deeper structures for your repositories
@@ -14,3 +14,9 @@
 always a good habit to have branches to store different things
 
 "testing for test branch"
+
+-when you make changes in different branches
+
+-auto merge will happnen
+
+-when conflics happen
