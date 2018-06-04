@@ -23,3 +23,5 @@ always a good habit to have branches to store different things
 
 -when conflics happen
 
+- rebase changes your history, we will be using it to make sure your 
+branch is up to date with the master branch

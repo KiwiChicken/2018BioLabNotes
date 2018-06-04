@@ -1,0 +1,83 @@
+---
+title: "6-4-2018"
+author: "KerenChen"
+date: "6/4/2018"
+output:
+  html_document:
+  chunk_output_type: console
+---
+#member push to git hub!
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(dplyr)
+library(nycflights13)
+```
+
+```{r}
+flights
+```
+# Filter
+```{r}
+(jan1 <- filter(flights, month == 1, day == 1))
+filter(flights, month %in% c(11, 12))
+filter(flights, arr_delay <= 120, dep_delay <= 12)
+arrange(flights, year, month, desc(day))
+select(flights, year, day)
+select(flights, year:day, arr_delay)
+select(flights, -(year:day))
+```
+
+```
+# some other helpful things; refer online for further details
+starts_with
+ends_with
+contains
+matches
+num_range # x1, x2, x3
+```
+```{r}
+rename(flights, "tail_num" = tailnum)
+# move time_hour and air_time to the beginning
+select(flights, time_hour, air_time, everything())
+```
+```{r}
+(flights_sml <- select(flights, 
+                      year:day,
+                      ends_with('delay'),
+                      distance,
+                      air_time))
+```
+```{r}
+mutate(flights_sml,
+       gain = arr_delay - dep_delay,
+       speed = distance / air_time * 60)
+```
+# Summarize (summarise)
+```{r}
+summarize(flights, delay = mean(dep_delay, na.rm = TRUE))
+# group_by splits in distinct types; when it is used, it groups results in distinct types
+(by_day <- group_by(flights,
+                   year, month, day))
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+# two equivalent ways:
+```{r}
+by_month <- group_by(flights,
+                     year, month)
+by_month <- summarize(by_month,
+                      delay = mean(dep_delay, na.rm = TRUE),
+                      delay_std = sd(dep_delay, na.rm = TRUE))
+by_month
+# equal to
+(by_month <- flights %>%
+    group_by(year, month) %>%
+    summarize(delay = mean(dep_delay, na.rm = TRUE),
+              delay_std = sd(dep_delay, na.rm = TRUE)))
+```
+
